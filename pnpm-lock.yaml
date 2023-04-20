@@ -88,6 +88,12 @@ dependencies:
   '@supabase/auth-helpers-nextjs':
     specifier: ^0.6.0
     version: 0.6.0(@supabase/supabase-js@2.20.0)
+  '@supabase/auth-ui-react':
+    specifier: ^0.3.5
+    version: 0.3.5(@supabase/supabase-js@2.20.0)
+  '@supabase/auth-ui-shared':
+    specifier: ^0.1.3
+    version: 0.1.3(@supabase/supabase-js@2.20.0)
   '@supabase/supabase-js':
     specifier: ^2.20.0
     version: 2.20.0
@@ -1567,6 +1573,10 @@ packages:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
 
+  /@stitches/core@1.2.8:
+    resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
+    dev: false
+
   /@supabase/auth-helpers-nextjs@0.6.0(@supabase/supabase-js@2.20.0):
     resolution: {integrity: sha512-f1e5blmpt9F/Bnb2hKreWHqf3zEhl29P357d5fnXzQ3Ph7DuW2Wha7uwQVTgE2QH3niqVpJpY0Pg0zBT5NmNWQ==}
     peerDependencies:
@@ -1583,6 +1593,27 @@ packages:
     dependencies:
       '@supabase/supabase-js': 2.20.0
       js-base64: 3.7.5
+    dev: false
+
+  /@supabase/auth-ui-react@0.3.5(@supabase/supabase-js@2.20.0):
+    resolution: {integrity: sha512-3X9rlLwQliRZ386qFjsCdHvMYQIzAByXT4uWcHssFIX4s0ymwkIH49UJDb6vtpswDV4z9ZOxF0igPZyEyZT32w==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.8.0
+    dependencies:
+      '@stitches/core': 1.2.8
+      '@supabase/auth-ui-shared': 0.1.3(@supabase/supabase-js@2.20.0)
+      '@supabase/supabase-js': 2.20.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@supabase/auth-ui-shared@0.1.3(@supabase/supabase-js@2.20.0):
+    resolution: {integrity: sha512-GoyW+3EiDcy+sQdmdkezx9fpsRSogHJwTdzxgf79PjyLbpyAKCnTVhOB02tiMHZ0uIZ+afAQ8CmNEwwxwHVnJw==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.8.0
+    dependencies:
+      '@supabase/supabase-js': 2.20.0
     dev: false
 
   /@supabase/functions-js@2.1.1:
@@ -3758,7 +3789,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /pump@3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
@@ -3801,7 +3831,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.0.35)(react@18.2.0):
     resolution: {integrity: sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==}
