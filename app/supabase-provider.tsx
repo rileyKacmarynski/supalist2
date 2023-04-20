@@ -5,15 +5,17 @@ import { useRouter } from 'next/navigation'
 import {
   createBrowserSupabaseClient,
   type SupabaseClient,
+  type User,
 } from '@supabase/auth-helpers-nextjs'
 
 import type { Database } from '@/lib/database.types'
 
-type SupabaseContext = {
+export type SupabaseContext = {
   supabase: SupabaseClient<Database>
+  user?: User
 }
 
-const Context = createContext<SupabaseContext | undefined>(undefined)
+const SupaContext = createContext<SupabaseContext | undefined>(undefined)
 
 export default function SupabaseProvider({
   children,
@@ -21,12 +23,19 @@ export default function SupabaseProvider({
   children: React.ReactNode
 }) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
-  const router = useRouter()
+  const [user, setUser] = useState<User>()
 
+  const router = useRouter()
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
+    } = supabase.auth.onAuthStateChange((e, session) => {
+      if (session?.user) {
+        setUser(session.user)
+      } else {
+        setUser(undefined)
+      }
+
       router.refresh()
     })
 
@@ -36,14 +45,14 @@ export default function SupabaseProvider({
   }, [router, supabase])
 
   return (
-    <Context.Provider value={{ supabase }}>
+    <SupaContext.Provider value={{ supabase, user }}>
       <>{children}</>
-    </Context.Provider>
+    </SupaContext.Provider>
   )
 }
 
-export const useSupabase = () => {
-  const context = useContext(Context)
+export function useSupabase() {
+  const context = useContext(SupaContext)
 
   if (context === undefined) {
     throw new Error('useSupabase must be used inside SupbaseProvider')

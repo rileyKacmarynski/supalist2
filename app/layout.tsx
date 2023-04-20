@@ -32,7 +32,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        'text-zinc-950 dark:bg-zinc-950 bg-white font-sans antialiased dark:text-zinc-50',
+        'bg-white font-sans text-zinc-950 antialiased dark:bg-zinc-950 dark:text-zinc-50',
         fontSans.variable
       )}
     >
