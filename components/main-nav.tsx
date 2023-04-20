@@ -37,7 +37,7 @@ export function MainNav({ items }: MainNavProps) {
                   key={index}
                   href={item.href}
                   className={cn(
-                    'hover:text-slate-950 flex items-center text-lg font-semibold text-slate-600 dark:text-slate-100 sm:text-sm',
+                    'hover:text-zinc-950 flex items-center text-lg font-semibold text-zinc-600 dark:text-zinc-100 sm:text-sm',
                     item.disabled && 'cursor-not-allowed opacity-80'
                   )}
                 >

@@ -1,6 +1,7 @@
 import { Inter as FontSans } from 'next/font/google'
 
 import '@/styles/globals.css'
+import SupabaseProvider from '@/app/supabase-provider'
 import { ThemeProvider } from 'next-themes'
 
 import { siteConfig } from '@/config/site'
@@ -31,16 +32,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        'text-slate-950 dark:bg-slate-950 bg-white font-sans antialiased dark:text-slate-50',
+        'text-zinc-950 dark:bg-zinc-950 bg-white font-sans antialiased dark:text-zinc-50',
         fontSans.variable
       )}
     >
-      <body className="min-h">
+      <body className="flex min-h-screen flex-col">
         {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
-        <SiteHeader />
-        <main>{children}</main>
-        <Toaster />
-        <TailwindIndicator />
+        <SupabaseProvider>
+          <SiteHeader />
+          <main className="grow">{children}</main>
+          <Toaster />
+          <TailwindIndicator />
+        </SupabaseProvider>
         {/* </ThemeProvider> */}
       </body>
     </html>
