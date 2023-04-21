@@ -2,10 +2,9 @@ import { Inter as FontSans } from 'next/font/google'
 
 import '@/styles/globals.css'
 import SupabaseProvider from '@/app/supabase-provider'
-import { ThemeProvider } from 'next-themes'
 
 import { siteConfig } from '@/config/site'
-import { absoluteUrl, cn } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { SiteHeader } from '@/components/site-header'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Toaster } from '@/components/ui/toaster'

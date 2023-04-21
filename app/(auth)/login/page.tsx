@@ -42,7 +42,7 @@ export default function SignUp() {
     })
 
     if (!error) {
-      router.push('/')
+      router.push('/app')
     } else {
       setLoggingIn(false)
       toast({

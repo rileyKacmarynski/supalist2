@@ -1,7 +1,7 @@
-import { cookies, headers } from 'next/headers'
 import Link from 'next/link'
 
 import { siteConfig } from '@/config/site'
+import { getUser } from '@/lib/data'
 import { createServerComponentClient } from '@/lib/supabase-client'
 import AuthMenu from '@/components/auth-menu'
 import { Icons } from '@/components/icons'
@@ -10,10 +10,7 @@ import { buttonVariants } from '@/components/ui/button'
 
 export const SiteHeader = async function SiteHeader() {
   const supabase = createServerComponentClient()
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const { user } = await getUser(supabase)
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-b-zinc-200 dark:border-b-zinc-700 dark:bg-zinc-950">
