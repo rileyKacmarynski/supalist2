@@ -1,17 +1,25 @@
+import { cookies, headers } from 'next/headers'
 import Link from 'next/link'
 
 import { siteConfig } from '@/config/site'
+import { createServerComponentClient } from '@/lib/supabase-client'
+import AuthMenu from '@/components/auth-menu'
 import { Icons } from '@/components/icons'
 import { MainNav } from '@/components/main-nav'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { buttonVariants } from '@/components/ui/button'
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const supabase = createServerComponentClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   return (
-    <header className="dark:bg-zinc-950 sticky top-0 z-40 w-full border-b border-b-zinc-200 bg-white dark:border-b-zinc-700">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-b-zinc-200 dark:border-b-zinc-700 dark:bg-zinc-950">
+      <div className="container flex items-center h-16 space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
-        <div className="flex flex-1 items-center justify-end space-x-4">
+        <div className="flex items-center justify-end flex-1 space-x-4">
           <nav className="flex items-center space-x-1">
             <Link
               href={siteConfig.links.github}
@@ -25,27 +33,11 @@ export function SiteHeader() {
                   className: 'text-zinc-700 dark:text-zinc-400',
                 })}
               >
-                <Icons.gitHub className="h-5 w-5" />
+                <Icons.GitHub className="w-6 h-6" />
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
-            <Link
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={buttonVariants({
-                  size: 'sm',
-                  variant: 'ghost',
-                  className: 'text-zinc-700 dark:text-zinc-400',
-                })}
-              >
-                <Icons.twitter className="h-5 w-5 fill-current" />
-                <span className="sr-only">Twitter</span>
-              </div>
-            </Link>
-            <ThemeToggle />
+            <AuthMenu user={user} />
           </nav>
         </div>
       </div>

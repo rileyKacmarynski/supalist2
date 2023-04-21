@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useSupabase } from '@/app/supabase-provider'
+import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -21,7 +22,8 @@ type Login = z.infer<typeof schema>
 export default function SignUp() {
   const { supabase } = useSupabase()
   const router = useRouter()
-  const [loggingIn, setLogginIn] = useState(false)
+  const { toast } = useToast()
+  const [loggingIn, setLoggingIn] = useState(false)
 
   const {
     register,
@@ -32,13 +34,23 @@ export default function SignUp() {
   })
 
   const onSubmit = async ({ email, password }: Login) => {
-    await supabase.auth.signInWithPassword({
+    setLoggingIn(true)
+
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
 
-    // we're going to pretend errors don't happen for now
-    router.push('/')
+    if (!error) {
+      router.push('/')
+    } else {
+      setLoggingIn(false)
+      toast({
+        title: 'Error logging in',
+        description: error?.message,
+        variant: 'destructive',
+      })
+    }
   }
 
   return (
@@ -63,7 +75,9 @@ export default function SignUp() {
             placeholder="password"
           />
         </div>
-        <Button type="submit">Login</Button>
+        <Button disabled={loggingIn} type="submit">
+          Login
+        </Button>
       </form>
       <Link
         className="mt-2 text-sm underline transition text-zinc-400 underline-offset-4 hover:text-zinc-500"

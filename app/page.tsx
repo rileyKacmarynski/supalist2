@@ -1,6 +1,6 @@
-'use client'
-
+import { cookies, headers } from 'next/headers'
 import Link from 'next/link'
+import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
 
 import { siteConfig } from '@/config/site'
 import { buttonVariants } from '@/components/ui/button'
@@ -20,7 +20,7 @@ export default function IndexPage() {
       </div>
       <div className="flex gap-4">
         <Link
-          href={siteConfig.links.docs}
+          href="#"
           target="_blank"
           rel="noreferrer"
           className={buttonVariants({ size: 'lg' })}

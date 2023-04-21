@@ -5,14 +5,12 @@ interface SiteConfig {
   description: string
   mainNav: NavItem[]
   links: {
-    twitter: string
     github: string
-    docs: string
   }
 }
 
 export const siteConfig: SiteConfig = {
-  name: 'Next.js',
+  name: 'SupaList',
   description:
     'Beautifully designed components built with Radix UI and Tailwind CSS.',
   mainNav: [
@@ -22,8 +20,6 @@ export const siteConfig: SiteConfig = {
     },
   ],
   links: {
-    twitter: 'https://twitter.com/shadcn',
-    github: 'https://github.com/shadcn/ui',
-    docs: 'https://ui.shadcn.com',
+    github: 'https://github.com/rileyKacmarynski/supalist2',
   },
 }

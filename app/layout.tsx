@@ -36,15 +36,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         fontSans.variable
       )}
     >
-      <body className="flex min-h-screen flex-col">
-        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
+      <body className="flex flex-col min-h-screen">
         <SupabaseProvider>
           <SiteHeader />
           <main className="grow">{children}</main>
           <Toaster />
           <TailwindIndicator />
         </SupabaseProvider>
-        {/* </ThemeProvider> */}
       </body>
     </html>
   )
