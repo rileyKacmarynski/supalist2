@@ -20,21 +20,21 @@ export default function IndexPage() {
       </div>
       <div className="flex gap-4">
         <Link
-          href="#"
+          href="/"
           target="_blank"
           rel="noreferrer"
           className={buttonVariants({ size: 'lg' })}
         >
           Documentation
         </Link>
-        <Link
+        <a
           target="_blank"
           rel="noreferrer"
           href={siteConfig.links.github}
           className={buttonVariants({ variant: 'outline', size: 'lg' })}
         >
           GitHub
-        </Link>
+        </a>
       </div>
     </section>
   )

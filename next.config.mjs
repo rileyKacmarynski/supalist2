@@ -3,6 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     appDir: true,
+    typedRoutes: true,
+    turbo: true,
   },
 }
 

@@ -1,6 +1,8 @@
+import { Route } from 'next'
+
 export interface NavItem {
   title: string
-  href?: string
+  href?: Route
   disabled?: boolean
   external?: boolean
 }
