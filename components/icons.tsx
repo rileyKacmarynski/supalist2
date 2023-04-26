@@ -4,6 +4,7 @@ import {
   LucideProps,
   Moon,
   SunMedium,
+  Trash2,
   Twitter,
   Zap,
   type Icon as LucideIcon,
@@ -18,6 +19,7 @@ export const Icons = {
   Twitter: Twitter,
   Logout: LogOut,
   Zap: Zap,
+  Delete: Trash2,
   // logo: (props: LucideProps) => (
   //   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
   //     <path
