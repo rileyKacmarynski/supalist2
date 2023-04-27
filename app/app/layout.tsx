@@ -15,5 +15,5 @@ export default async function AppLayout({
     redirect('/')
   }
 
-  return <section className="mx-6 mt-12">{children}</section>
+  return <section className="mx-6 mt-8">{children}</section>
 }

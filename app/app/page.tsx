@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -77,37 +78,57 @@ export default function App() {
         Groceries
       </h1>
       <ul className="mt-3">
-        {items.map((i) => (
-          <li className="flex items-center py-1 mb-1 group" key={i.id}>
-            <DeleteButton onClick={() => deleteItem(i.id)} />
-            <Checkbox
-              onCheckedChange={() => markComplete(i.id)}
-              checked={i.complete}
-              id={`item-${i.id}`}
-            />
-            <label
-              className={cn(
-                'text-zinc-500 relative ml-3 cursor-pointer transition-colors ',
-                'before:absolute before:h-[2px] before:bg-transparent before:w-full before:top-1/2',
-                i.complete && 'text-zinc-400 before:bg-zinc-400 '
-              )}
-              htmlFor={`item-${i.id}`}
+        <AnimatePresence initial={false}>
+          {items.map((i) => (
+            <motion.li
+              transition={{
+                type: 'tween',
+                ease: 'easeIn',
+                duration: 0.2,
+                opacity: { duration: 0.1 },
+              }}
+              initial={{ height: 0 }}
+              animate={{ height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="group"
+              key={i.id}
             >
-              {i.text}
-            </label>
+              <div className="flex items-center py-1 pb-1">
+                <DeleteButton onClick={() => deleteItem(i.id)} />
+                <Checkbox
+                  onCheckedChange={() => markComplete(i.id)}
+                  checked={i.complete}
+                  id={`item-${i.id}`}
+                />
+                <label
+                  className={cn(
+                    'text-zinc-600 relative pl-3 cursor-pointer transition duration-300',
+                    'before:absolute before:h-[2px] before:w-[calc(100%-0.75rem)]',
+                    'before:transition  before:duration-200 before:scale-x-0 before:origin-left before:bg-transparent before:top-1/2',
+                    i.complete &&
+                      'text-zinc-400 before:bg-zinc-400 before:scale-x-100'
+                  )}
+                  htmlFor={`item-${i.id}`}
+                >
+                  {i.text}
+                </label>
+              </div>
+            </motion.li>
+          ))}
+          <li key="form">
+            <div className="flex items-center gap-3 py-1 mb-1 ml-6">
+              <Checkbox disabled checked={false} />
+              <form onSubmit={handleSubmit(addItem)}>
+                <Input
+                  {...register('text')}
+                  className="h-auto p-0 text-base border-t-0 border-b border-l-0 border-r-0 rounded-none outline-none ring-0 border-b-zinc-400 text-zinc-600 focus:ring-0 focus:placeholder:text-transparent placeholder:text-zinc-400"
+                  placeholder="Add item"
+                />
+                <button type="submit" className="hidden" />
+              </form>
+            </div>
           </li>
-        ))}
-        <li className="flex items-center gap-3 py-1 mb-1">
-          <Checkbox disabled checked={false} />
-          <form onSubmit={handleSubmit(addItem)}>
-            <Input
-              {...register('text')}
-              className="h-auto p-0 text-base border-none outline-none text-zinc-500 focus:ring-0"
-              placeholder="Add item"
-            />
-            <button type="submit" className="hidden" />
-          </form>
-        </li>
+        </AnimatePresence>
       </ul>
     </div>
   )

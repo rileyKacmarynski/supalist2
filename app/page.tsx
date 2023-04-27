@@ -37,6 +37,7 @@ export default async function IndexPage() {
           GitHub
         </a>
       </div>
+      <div className="mt-36">yoooooo</div>
     </section>
   )
 }
