@@ -23,14 +23,14 @@ interface MainNavProps {
 export function MainNav({ items }: MainNavProps) {
   return (
     <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="items-center hidden space-x-2 md:flex">
+      <Link href="/" className="flex items-center space-x-2">
         <Icons.Zap className="w-6 h-6" />
         <span className="hidden font-bold sm:inline-block">
           {siteConfig.name}
         </span>
       </Link>
       {items?.length ? (
-        <nav className="hidden gap-6 md:flex">
+        <nav className="flex gap-6">
           {items?.map(
             (item, index) =>
               item.href && (
@@ -48,7 +48,7 @@ export function MainNav({ items }: MainNavProps) {
           )}
         </nav>
       ) : null}
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
@@ -78,7 +78,7 @@ export function MainNav({ items }: MainNavProps) {
               )
           )}
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
     </div>
   )
 }

@@ -36,12 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       )}
     >
       <body className="flex flex-col min-h-screen">
-        <SupabaseProvider>
-          <SiteHeader />
-          <main className="grow">{children}</main>
-          <Toaster />
-          <TailwindIndicator />
-        </SupabaseProvider>
+        <SupabaseProvider>{children}</SupabaseProvider>
       </body>
     </html>
   )
