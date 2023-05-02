@@ -93,7 +93,7 @@ export default function SideNav() {
           {[...new Array(8)].map(() => (
             <div className="flex">
               <Link
-                href="#"
+                href="/"
                 className="justify-start py-0.5 pl-1.5 my-0.5 mx-1 text-sm transition duration-300 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 grow"
               >
                 This is a list
