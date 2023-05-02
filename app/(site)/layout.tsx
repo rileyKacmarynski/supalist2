@@ -11,8 +11,6 @@ export default function SiteLayout({ children }: SiteLayoutProps) {
     <>
       <SiteHeader />
       <main className="grow">{children}</main>
-      <Toaster />
-      <TailwindIndicator />
     </>
   )
 }

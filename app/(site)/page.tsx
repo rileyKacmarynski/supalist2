@@ -2,12 +2,10 @@ import Link from 'next/link'
 
 import { siteConfig } from '@/config/site'
 import { getUser } from '@/lib/data'
-import { createServerComponentClient } from '@/lib/supabase-client'
 import { buttonVariants } from '@/components/ui/button'
 
 export default async function IndexPage() {
-  const supabase = createServerComponentClient()
-  const { user } = await getUser(supabase)
+  const { user } = await getUser()
 
   return (
     <section className="container grid items-center gap-6 pt-6 pb-8 md:py-10">

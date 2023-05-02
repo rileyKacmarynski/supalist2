@@ -9,8 +9,7 @@ import { MainNav } from '@/components/main-nav'
 import { buttonVariants } from '@/components/ui/button'
 
 export const SiteHeader = async function SiteHeader() {
-  const supabase = createServerComponentClient()
-  const { user } = await getUser(supabase)
+  const { user } = await getUser()
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-b-zinc-200 dark:border-b-zinc-700 dark:bg-zinc-950">

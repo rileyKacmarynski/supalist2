@@ -1,9 +1,10 @@
+import 'server-only'
 import { cache } from 'react'
-import { SupabaseClient } from '@supabase/auth-helpers-nextjs'
 
-import type { Database } from '@/lib/database.types'
+import { createServerComponentClient } from '@/lib/supabase-client'
 
-export const getUser = cache(async (supabase: SupabaseClient<Database>) => {
+export const getUser = cache(async () => {
+  const supabase = createServerComponentClient()
   const {
     data: { user },
     error,
