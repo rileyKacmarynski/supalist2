@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     serverActions: true,
-    // turbo: true,
+    turbo: true,
   },
 }
 
