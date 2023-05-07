@@ -1,10 +1,12 @@
 import {
   Delete,
+  Hash,
   Laptop,
   LogOut,
   LucideProps,
   Menu,
   Moon,
+  Plus,
   SunMedium,
   Trash2,
   Twitter,
@@ -25,6 +27,8 @@ export const Icons = {
   Delete: Trash2,
   Menu: Menu,
   Close: X,
+  Hash,
+  Plus,
   // logo: (props: LucideProps) => (
   //   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
   //     <path

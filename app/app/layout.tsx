@@ -1,8 +1,11 @@
 // 'use client'
 
 import React from 'react'
+import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { redirect, useRouter } from 'next/navigation'
+import ServerLists from '@/app/app/components/ServerLists'
+import ListForm from '@/app/app/components/list-form'
 import SideNav from '@/app/app/components/side-nav'
 
 import { getUser } from '@/lib/data'
@@ -20,9 +23,19 @@ export default async function AppLayout({
     redirect('/')
   }
 
+  const addItem = async (formData: FormData) => {
+    'use server'
+
+    console.log(cookies())
+  }
+
   return (
     <div className="flex h-screen">
-      <SideNav />
+      <SideNav>
+        {/* @ts-ignore */}
+        <ServerLists />
+        <ListForm />
+      </SideNav>
       <main className="grow">
         <section className="mx-6 mt-8">{children}</section>
       </main>

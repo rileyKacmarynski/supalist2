@@ -9,7 +9,61 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      [_ in never]: never
+      list_items: {
+        Row: {
+          completed: boolean
+          created_at: string | null
+          id: string
+          list_id: string
+          text: string
+          updated_at: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string | null
+          id?: string
+          list_id: string
+          text: string
+          updated_at?: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string | null
+          id?: string
+          list_id?: string
+          text?: string
+          updated_at?: string
+        }
+      }
+      lists: {
+        Row: {
+          author_id: string
+          contributors: string[] | null
+          created_at: string
+          icon: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          contributors?: string[] | null
+          created_at?: string
+          icon?: string | null
+          id: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          contributors?: string[] | null
+          created_at?: string
+          icon?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
