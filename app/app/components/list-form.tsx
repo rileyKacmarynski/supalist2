@@ -12,6 +12,13 @@ import { useForm } from 'react-hook-form'
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import {
+  SimpleTooltip,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export default function ListForm() {
   const { supabase, user } = useSupabase()
@@ -68,15 +75,17 @@ export default function ListForm() {
               </motion.div>
             )}
           </AnimatePresence>
-          <Button
-            title="create list"
-            className="py-0.5 h-6 px-1 mx-0 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800"
-            type={navOpen ? 'submit' : 'button'}
-            variant="ghost"
-            onClick={handleAddClick}
-          >
-            <Icons.Plus className="w-5 h-4 text-zinc-400" />
-          </Button>
+          <SimpleTooltip content="create list">
+            <Button
+              // title="create list"
+              className="py-0.5 h-6 px-1 mx-0 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800"
+              type={navOpen ? 'submit' : 'button'}
+              variant="ghost"
+              onClick={handleAddClick}
+            >
+              <Icons.Plus className="w-5 h-4 text-zinc-400" />
+            </Button>
+          </SimpleTooltip>
         </form>
       </div>
     </div>

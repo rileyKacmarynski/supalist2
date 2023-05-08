@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import {
+  SimpleTooltip,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -140,21 +141,14 @@ type DeleteProps = {
 
 function DeleteButton({ onClick }: DeleteProps) {
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            className="w-5 h-5 p-0 mr-1 transition opacity-0 text-zinc-400 focus:ring-0 focus:opacity-100 group-hover:opacity-100 focus:bg-zinc-100 dark:focus:bg-zinc-800"
-            onClick={onClick}
-          >
-            <Icons.Delete className="w-4 h-4 stroke-2" />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>delete item</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <SimpleTooltip content="delete item">
+      <Button
+        variant="ghost"
+        className="w-5 h-5 p-0 mr-1 transition opacity-0 text-zinc-400 focus:ring-0 focus:opacity-100 group-hover:opacity-100 focus:bg-zinc-100 dark:focus:bg-zinc-800"
+        onClick={onClick}
+      >
+        <Icons.Delete className="w-4 h-4 stroke-2" />
+      </Button>
+    </SimpleTooltip>
   )
 }

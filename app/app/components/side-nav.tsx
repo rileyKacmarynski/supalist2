@@ -14,6 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { SimpleTooltip } from '@/components/ui/tooltip'
 
 const expandWidth = 240
 const shrinkWidth = 44
@@ -102,16 +103,17 @@ export default function SideNav({ children }: { children: React.ReactNode }) {
             </DropdownMenu>
           </div>
           {children}
-          <Button
-            onClick={toggleNav}
-            title={navOpen ? 'collapse menu' : 'expand menu'}
-            variant="ghost"
-            className="flex items-center justify-center h-auto p-1 mt-auto mb-6 ml-auto mr-2 text-sm transition duration-300 rounded hover:bg-zinc-200 focus:ring-0"
-          >
-            <motion.div variants={sidebarVariants.icon}>
-              <MenuToggleIcon className="w-5 h-5 text-zinc-400" />
-            </motion.div>
-          </Button>
+          <SimpleTooltip content={navOpen ? 'collapse menu' : 'expand menu'}>
+            <Button
+              onClick={toggleNav}
+              variant="ghost"
+              className="flex items-center justify-center h-auto p-1 mt-auto mb-6 ml-auto mr-2 text-sm transition duration-300 rounded hover:bg-zinc-200 focus:ring-0"
+            >
+              <motion.div variants={sidebarVariants.icon}>
+                <MenuToggleIcon className="w-5 h-5 text-zinc-400" />
+              </motion.div>
+            </Button>
+          </SimpleTooltip>
         </motion.div>
       </NavContext.Provider>
     </MotionConfig>
