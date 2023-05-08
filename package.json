@@ -47,6 +47,7 @@
     "@supabase/auth-ui-react": "^0.3.6",
     "@supabase/auth-ui-shared": "^0.1.4",
     "@supabase/supabase-js": "^2.21.0",
+    "@types/uuid": "^9.0.1",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "cmdk": "^0.2.0",
@@ -62,6 +63,7 @@
     "sharp": "^0.32.1",
     "tailwind-merge": "^1.12.0",
     "tailwindcss-animate": "^1.0.5",
+    "uuid": "^9.0.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

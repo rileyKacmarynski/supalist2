@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { sidebarVariants, useNav } from '@/app/app/components/side-nav'
+import { List } from '@/app/app/schema'
 import { useSupabase } from '@/app/supabase-provider'
 import { useToast } from '@/hooks/use-toast'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -22,8 +23,6 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { SimpleTooltip } from '@/components/ui/tooltip'
-
-export type List = Database['public']['Tables']['lists']['Row']
 
 export type ListsProps = {
   serverLists: List[]
@@ -58,7 +57,7 @@ export function Lists({ serverLists }: ListsProps) {
 
   const deleteList = async (id: string) => {
     console.log('deleting', id)
-    const { error } = await supabase.from('lists').delete().eq('id', id)
+    const { error } = await supabase.from('lists').delete().match({ id })
 
     if (error) {
       toast({
@@ -91,7 +90,7 @@ export function Lists({ serverLists }: ListsProps) {
           >
             <div className="relative flex items-center justify-between transition duration-300 hover:bg-zinc-200 dark:hover:bg-zinc-700">
               <Link
-                href="/"
+                href={`/app/${list.id}`}
                 className="flex items-center py-0.5 px-1 h-6 my-0.5 mx-1 text-sm rounded grow"
               >
                 {/* eventually I'll figure out some icon picker */}
@@ -99,7 +98,7 @@ export function Lists({ serverLists }: ListsProps) {
                 <AnimatePresence initial={false}>
                   {navOpen && (
                     <motion.span
-                      className="min-w-0 ml-1 overflow-hidden whitespace-nowrap"
+                      className="min-w-0 ml-1 truncate"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -109,8 +108,18 @@ export function Lists({ serverLists }: ListsProps) {
                   )}
                 </AnimatePresence>
               </Link>
-
-              <DeleteButton onDelete={() => deleteList(list.id)} />
+              <AnimatePresence initial={false}>
+                {navOpen && (
+                  <motion.div
+                    className="relative w-5 h-5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <DeleteButton onDelete={() => deleteList(list.id)} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         ))}

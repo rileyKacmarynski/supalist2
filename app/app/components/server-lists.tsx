@@ -1,7 +1,5 @@
-import { Lists } from '@/app/app/components/Lists'
-import { SupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { Lists } from '@/app/app/components/lists'
 
-import { Database } from '@/lib/database.types'
 import { createServerComponentClient } from '@/lib/supabase-client'
 
 export default async function ServerLists() {
