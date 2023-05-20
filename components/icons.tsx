@@ -7,6 +7,7 @@ import {
   Menu,
   Moon,
   Plus,
+  Share2,
   SunMedium,
   Trash2,
   Twitter,
@@ -29,6 +30,7 @@ export const Icons = {
   Close: X,
   Hash,
   Plus,
+  Share: Share2,
   // logo: (props: LucideProps) => (
   //   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" {...props}>
   //     <path

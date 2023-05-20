@@ -73,13 +73,15 @@ export function useList(id: string) {
 
   useEffect(() => {
     const getList = async () => {
+      // really fighting with supabase here
+      // cross schema joins aren't a thing
       const result = await supabase
         .from('lists')
         .select(
           `*,
-      list_items (
-        *
-      )`
+          list_items (
+            *
+          )`
         )
         .match({ id })
 

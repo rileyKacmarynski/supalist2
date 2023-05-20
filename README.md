@@ -1,78 +1,19 @@
-# next-template
+# Supalist
 
-A Next.js 13 template for building apps with Radix UI and Tailwind CSS.
+## Another shot at using some cool supabase features to create a list app with NextJS App Router
 
-## Features
+made with:
 
-- Radix UI Primitives
+- Supabase
+- ShadCN UI
+- Next13 App Router
 - Tailwind CSS
-- Fonts with `@next/font`
-- Icons from [Lucide](https://lucide.dev)
-- Dark mode with `next-themes`
-- Automatic import sorting with `@ianvs/prettier-plugin-sort-imports`
 
-## Tailwind CSS Features
+I got a pretty good start, but I was kind of banking on the client js supabase library to come through and help me out. The realtime and auth features are great, but there's a lot of gaps. I would like to be able to share a list with other users, but there's not a great way to query from the auth schema. I find myself designing my data around the js client and supabase to make things easier. I think the way to go would treat it like a hosted Postgres DB and bring your own query library.
 
-- Class merging with `taiwind-merge`
-- Animation with `tailwindcss-animate`
-- Conditional classes with `clsx`
-- Variants with `class-variance-authority`
-- Automatic class sorting with `eslint-plugin-tailwindcss`
+Probably calling it quits for now. I don't really want to spend my time making workarounds or re-implementing the client features with another ORM. Maybe I'll persue that route at some point. What I've learned is:
 
-## Import Sort
-
-The starter comes with `@ianvs/prettier-plugin-sort-imports` for automatically sort your imports.
-
-### Input
-
-```tsx
-import * as React from 'react'
-import Link from 'next/link'
-
-import { siteConfig } from '@/config/site'
-import { buttonVariants } from '@/components/ui/button'
-import '@/styles/globals.css'
-import { twMerge } from 'tailwind-merge'
-
-import { NavItem } from '@/types/nav'
-import { cn } from '@/lib/utils'
-```
-
-### Output
-
-```tsx
-import * as React from 'react'
-// React is always first.
-import Link from 'next/link'
-// Followed by next modules.
-import { twMerge } from 'tailwind-merge'
-
-// Followed by third-party modules
-// Space
-import '@/styles/globals.css'
-// styles
-import { NavItem } from '@/types/nav'
-// types
-import { siteConfig } from '@/config/site'
-// config
-import { cn } from '@/lib/utils'
-// lib
-import { buttonVariants } from '@/components/ui/button'
-
-// components
-```
-
-### Class Merging
-
-The `cn` util handles conditional classes and class merging.
-
-### Input
-
-```ts
-cn('px-2 bg-zinc-100 py-2 bg-zinc-200')
-// Outputs `p-2 bg-zinc-200`
-```
-
-## License
-
-Licensed under the [MIT license](https://github.com/shadcn/ui/blob/main/LICENSE.md).
+- Supabase is super easy to use and as a hosted, free postgres offering it's seems pretty good for hobby stuff.
+- It's super easy to spin up something with the client JS library, but it might falls short for what you want to do. You can rely on postgres knowledge to create workarounds, but it seems hacky.
+- ShadCN UI is brilliant. It's so easy to use and I like being able to import and modify components
+- App router has it's quirks and trying to integrate realtime updates with server components probably isn't the best idea. I think it's best at some point to treat a sub-tree of your app as a regular client app. Seem amazing for more traditional web sites and simpler apps though.

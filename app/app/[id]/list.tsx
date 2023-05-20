@@ -1,5 +1,7 @@
 'use client'
 
+import ListHeader from '@/app/app/[id]/list-header'
+import { ListWithItems } from '@/app/app/schema'
 import { useList } from '@/app/app/use-list'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -43,9 +45,7 @@ export default function List({ id }: { id: string }) {
 
   return (
     <div>
-      <h1 className="ml-5 text-2xl font-medium tracking-tighter sm:text-2xl md:text-3xl lg:text-4xl">
-        {list.name}
-      </h1>
+      <ListHeader list={list} />
       <ul className="mt-3">
         {!list.loading && (
           <AnimatePresence initial={false}>

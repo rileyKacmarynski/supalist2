@@ -1,8 +1,5 @@
 import { cache } from 'react'
-import { notFound, redirect } from 'next/navigation'
 import List from '@/app/app/[id]/list'
-import { ListWithItems } from '@/app/app/schema'
-import { useSupabase } from '@/app/supabase-provider'
 import { SupabaseClient } from '@supabase/supabase-js'
 
 import { Database } from '@/lib/database.types'
