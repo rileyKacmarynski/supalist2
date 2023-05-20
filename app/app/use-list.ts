@@ -4,12 +4,14 @@ import { useSupabase } from '@/app/supabase-provider'
 import { useToast } from '@/hooks/use-toast'
 import { PostgrestError } from '@supabase/supabase-js'
 import { v4 as uuidv4 } from 'uuid'
+import { boolean } from 'zod'
 
 export const actionTypes = {
   ADD_ITEM: 'ADD_ITEM',
   DELTE_ITEM: 'DELETE_ITEM',
   TOGGLE_ITEM_COMPLETE: 'TOGGLE_ITEM_COMPLETE',
   UPDATE_ITEM: 'UPDATE_ITEM',
+  SET_LIST: 'SET_LIST',
 } as const
 
 export type ActionType = typeof actionTypes
@@ -18,8 +20,11 @@ export type Action =
   | { type: ActionType['ADD_ITEM']; item: ListItem }
   | { type: ActionType['DELTE_ITEM']; itemId: string }
   | { type: ActionType['UPDATE_ITEM']; item: Partial<ListItem> }
+  | { type: ActionType['SET_LIST']; list: ListWithItems }
 
-export type State = ListWithItems
+export type State = ListWithItems & {
+  loading: boolean
+}
 
 export function reducer(state: State, action: Action): State {
   function updateItem(item: Partial<ListItem>) {
@@ -37,6 +42,11 @@ export function reducer(state: State, action: Action): State {
     }
   }
   switch (action.type) {
+    case 'SET_LIST':
+      return {
+        loading: false,
+        ...action.list,
+      }
     case 'ADD_ITEM':
       return {
         ...state,
@@ -52,10 +62,32 @@ export function reducer(state: State, action: Action): State {
   }
 }
 
-export function useList(initialList: ListWithItems) {
-  const [list, dispatch] = useReducer(reducer, initialList)
-  const { supabase, user } = useSupabase()
+export function useList(id: string) {
+  const [list, dispatch] = useReducer(reducer, {
+    id,
+    list_items: [],
+    loading: true,
+  } as unknown as State)
+  const { supabase } = useSupabase()
   const { toast } = useToast()
+
+  useEffect(() => {
+    const getList = async () => {
+      const result = await supabase
+        .from('lists')
+        .select(
+          `*,
+      list_items (
+        *
+      )`
+        )
+        .match({ id })
+
+      // @ts-ignore
+      dispatch({ type: 'SET_LIST', list: result.data[0] })
+    }
+    getList()
+  }, [id, supabase])
 
   useEffect(() => {
     console.log('subscribing to changes')
@@ -134,7 +166,7 @@ export function useList(initialList: ListWithItems) {
         })
       }
     },
-    [list]
+    [list.id, supabase, toast]
   )
 
   const deleteItem = useCallback(

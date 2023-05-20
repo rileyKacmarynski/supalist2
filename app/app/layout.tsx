@@ -18,17 +18,6 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { user } = await getUser()
-  if (!user) {
-    redirect('/')
-  }
-
-  const addItem = async (formData: FormData) => {
-    'use server'
-
-    console.log(cookies())
-  }
-
   return (
     <div className="flex h-screen">
       <SideNav>
